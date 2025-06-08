@@ -100,6 +100,7 @@ public:
         AUTOROTATE =   26,  // Autonomous autorotation
         AUTO_RTL =     27,  // Auto RTL, this is not a true mode, AUTO will report as this mode if entered to perform a DO_LAND_START Landing sequence
         TURTLE =       28,  // Flip over after crash
+        PPOC =         29   // NEW MODE FOR PPOC
 
         // Mode number 30 reserved for "offboard" for external/lua control.
 
@@ -2057,3 +2058,23 @@ private:
 
 };
 #endif
+
+class PPOC : public Mode {
+public:
+    // Inherit base constructor
+    using Mode::Mode;
+
+    // Flight mode number (must match enum in mode.h)
+    Number mode_number() const override { return Number::PPOC; }
+
+    // Called once when mode is activated
+    bool init(bool ignore_checks) override;
+
+    // Called repeatedly in main loop
+    void run() override;
+
+protected:
+    const char *name() const override { return "PPOC"; }
+    const char *name4() const override { return "PPOC"; }
+};
+
