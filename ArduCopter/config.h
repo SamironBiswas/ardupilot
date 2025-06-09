@@ -196,6 +196,10 @@
 # define MODE_POSHOLD_ENABLED 1
 #endif
 
+#ifndef MODE_PPOC_ENABLED
+# define MODE_PPOC_ENABLED 1
+#endif
+
 //////////////////////////////////////////////////////////////////////////////
 // RTL - Return To Launch
 #ifndef MODE_RTL_ENABLED
