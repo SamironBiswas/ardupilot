@@ -153,10 +153,14 @@ Mode *Copter::mode_from_mode_num(const Mode::Number mode)
             return &mode_turtle;
 #endif
 
+#if MODE_PPOC_ENABLED
+        case Mode::Number::PPOC:
+            return &mode_ppoc;
+#endif
+
         default:
             break;
     }
-
 #if MODE_GUIDED_ENABLED && AP_SCRIPTING_ENABLED
     // Check registered custom modes
     for (uint8_t i = 0; i < ARRAY_SIZE(mode_guided_custom); i++) {
@@ -209,7 +213,8 @@ bool Copter::gcs_mode_enabled(const Mode::Number mode_num)
         (uint8_t)Mode::Number::SYSTEMID,
         (uint8_t)Mode::Number::AUTOROTATE,
         (uint8_t)Mode::Number::AUTO_RTL,
-        (uint8_t)Mode::Number::TURTLE
+        (uint8_t)Mode::Number::TURTLE,
+        (uint8_t)Mode::Number::PPOC
     };
 
     if (!block_GCS_mode_change((uint8_t)mode_num, mode_list, ARRAY_SIZE(mode_list))) {
